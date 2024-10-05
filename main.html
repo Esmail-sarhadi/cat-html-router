@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C3X43 Industrial Dual SIM Cellular VPN Router</title>
+    <style>
+        :root {
+            --primary-color: #006400;
+            --secondary-color: #4CAF50;
+            --background-color: #f0f0f0;
+            --text-color: #333;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        .logo {
+            width: 80px;
+            height: auto;
+            margin-right: 20px;
+            transition: transform 0.3s ease;
+        }
+        .logo:hover {
+            transform: scale(1.1) rotate(360deg);
+        }
+        .company-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        .product-name {
+            font-size: 18px;
+            color: var(--secondary-color);
+        }
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul li {
+            margin-left: 20px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        nav ul li a:hover {
+            color: var(--secondary-color);
+        }
+        .section {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            padding: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+        }
+        .product-overview {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .product-image {
+            width: 45%;
+            max-width: 400px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .product-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        .key-features {
+            width: 50%;
+        }
+        .key-features ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .key-features li {
+            margin-bottom: 15px;
+            padding: 15px;
+            background-color: #f0f8ff;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        .key-features li:hover {
+            transform: translateX(10px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .key-features li span {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .feature-item {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        .feature-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .feature-icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        .application-diagram {
+            width: 100%;
+            height: 600px;
+            position: relative;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        .app-node {
+            position: absolute;
+            width: 180px;
+            height: 120px;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            font-size: 16px;
+            text-align: center;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        .app-node:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        .app-node img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+        .app-node .emoji {
+            font-size: 32px;
+            margin-bottom: 5px;
+        }
+        .app-connection {
+            position: absolute;
+            height: 2px;
+            background-image: linear-gradient(to right, var(--secondary-color) 50%, transparent 50%);
+            background-size: 20px 100%;
+            background-repeat: repeat-x;
+            z-index: -1;
+        }
+        .connection-label {
+            position: absolute;
+            background-color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 14px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .data-packet {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ff9800;
+            border-radius: 50%;
+            z-index: 10;
+        }
+        @keyframes movePacket {
+            0% { transform: translate(0, 0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        .specifications {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .spec-group {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        .spec-group:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+        .spec-group h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+        .spec-group h3 span {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        .spec-group ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .spec-group li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 20px;
+        }
+        .spec-group li::before {
+            content: '➤';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+        }
+        .ordering-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+        }
+        .ordering-table th, .ordering-table td {
+            padding: 15px;
+            text-align: center;
+            border: none;
+        }
+        .ordering-table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .ordering-table tr {
+            background-color: #f2f2f2;
+            transition: all 0.3s ease;
+        }
+        .ordering-table tr:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 40px;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin: 20px;
+        }
+        .footer-section h3 {
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+        footer a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        footer a:hover {
+            color: var(--secondary-color);
+        }
+        .footer-bottom {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .social-icons {
+            margin-top: 20px;
+        }
+        .social-icons a {
+            display: inline-block;
+            margin: 0 10px;
+            font-size: 24px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo-container">
+                <img src="logo.png" alt="TPS Logo" class="logo">
+                <div>
+                    <div class="company-name">Teyf Pardazan Spadana</div>
+                    <div class="product-name">C3X43 Industrial Dual SIM Cellular VPN Router</div>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#specifications">Specifications</a></li>
+                    <li><a href="#ordering">Ordering</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div id="overview" class="container">
+        <section class="section product-overview">
+            <img src="c3x43-product.png" alt="C3X43 Router" class="product-image" id="productImage">
+            <div class="key-features">
+                <h2>Key Features</h2>
+                <ul>
+                    <li><span>📱📡</span> Dual SIM DSSS for persistent 2G/3G/4G cellular network connection</li>
+                    <li><span>💻</span> WebUI + CLI</li>
+                    <li><span>🔒</span> IPsec/OpenVPN/GRE/PPTP/DMVPN</li>
+                    <li><span>☁️</span> Management and maintenance via Web/CLI/SMS/SNMP/Radius/TPS Cloud</li>
+                    <li><span>🏭</span> TPS industrial design (9~65 VDC, desktop or DIN rail mounting)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="features" class="introduction">
+            <h2>Introduction</h2>
+            <p>The Robustel Industrial Dual SIM Cellular VPN Router (C3X43 series) is a rugged cellular router offering state-of-the-art mobile connectivity for machine to machine (M2M) applications. C3X43 series is used extensively in industrial applications such as pipeline monitoring, water treatment, Gas & Electricity distribution networks and many similar environments where a hardened product with bulletproof cellular communications is required.</p>
+            <p>C3X43 series has extensive overvoltage protection, high EMC immunity and has a DIN-rail / panel mount form-factor making it ideal for use in any kind of industrial automation enclosure.</p>
+            <h3>Software Features</h3>
+            <div class="feature-list">
+                <div class="feature-item"><span class="feature-icon">📡</span> Smart Roaming — intelligent network selection tool for roaming SIMs</div>
+                <div class="feature-item"><span class="feature-icon">🔒</span> VPN — Simple remote access on any SIM using VPN</div>
+                <div class="feature-item"><span class="feature-icon">🖥️</span> TPSC — Router Management Platform — very feature rich</div>
+                <div class="feature-item"><span class="feature-icon">💰</span> Data Guard — Automatically stop data overruns to avoid billshock</div>
+                <div class="feature-item"><span class="feature-icon">🔄</span> Secure Reboot — System integrity and protection against tempered attacks using link watch</div>
+                <div class="feature-item"><span class="feature-icon">🔍</span> Link Watch — Intelligent network management based on ping or DNS</div>
+            </div>
+        </section>
+
+        <section class="tps-cloud">
+            <h2>TPS Cloud</h2>
+            <p>TPSC is TPS's router monitoring service that is fully compatible with the C3X43 series. It allows customers to see a location overview of their routers quickly and simply on a map. Features such as data usage, signal strength, current network and much more can be viewed on a per router basis. Over-the-air updates are supported for Firmware, router configuration and Apps serving as essential 'insurance' if anything was not quite right during deployment.</p>
+        </section>
+
+        <section class="section">
+            <h2>Application Example</h2>
+            <div class="application-diagram" id="applicationDiagram">
+                <!-- Diagram will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <section id="specifications" class="section">
+            <h2>Specifications</h2>
+            <div class="specifications">
+                <div class="spec-group fade-in">
+                    <h3><span>📡</span> Cellular Interface</h3>
+                    <ul>
+                        <li>Number of antennas: 2 (MAIN + AUX)</li><li>Connector: SMA-K</li>
+                        <li>SIM: 2 x Standard SIM</li>
+                        <li>Standards: GSM/GPRS/EDGE/WCDMA/HSDPA/HSUPA/HSPA+/DC-HSPA+/TD-SCDMA/CDMA (CDMA 1X/EVDO)/FDD LTE/TDD LTE</li>
+                    </ul>
+                </div>
+                <div class="spec-group fade-in">
+                    <h3><span>🌐</span> Ethernet Interface</h3>
+                    <ul>
+                        <li>Number of ports: 1 x 10/100 Mbps LAN port</li>
+                        <li>Magnet isolation protection: 1.5 KV</li>
+                    </ul>
+                </div>
+                <div class="spec-group fade-in">
+                    <h3><span>🔌</span> Serial Interface</h3>
+                    <ul>
+                        <li>Number of ports: 1x RS232 , 1 x RS485</li>
+                        <li>Connector: 5pin 3.81mm terminal block (for RS232) , 2pin 3.81mm terminal block (for RS485)</li>
+                        <li>ESD protection: ±15 KV</li>
+                        <li>Baud rate: 110 bps ~ 230400 bps</li>
+                        <li>Flow control: RTS/CTS (for RS232)</li>
+                    </ul>
+                </div>
+                <div class="spec-group fade-in">
+                    <h3><span>📶</span> Wi-Fi Interface</h3>
+                    <ul>
+                        <li>Number of antenna: 1</li>
+                        <li>Connector: RP-SMA-K</li>
+                        <li>Standards: 802.11 b/g/n, Supports server and client modes</li>
+                        <li>Frequency bands: 2.4 GHz</li>
+                        <li>Security: WEP, WPA, WPA2, WPA3</li>
+                        <li>Encryption: 128/256 AES</li>
+                    </ul>
+                </div>
+                <div class="spec-group fade-in">
+                    <h3><span>🔄</span> DI/DO</h3>
+                    <ul>
+                        <li>Type: 2 x DI + 2 x DO, wet contact</li>
+                        <li>Isolation: 3KV</li>
+                        <li>Socket form: 4x 2pin 3.81mm terminal block</li>
+                        <li>Level: 3-30 VDC = High 0-1 VDC = Low</li>
+                        <li>Absolute maximum VDC: 30 VDC (DI), 9 VDC (DO)</li>
+                        <li>Absolute maximum ADC: 10 mA (DI/DO)</li>
+                    </ul>
+                </div>
+                <div class="spec-group fade-in">
+                    <h3><span>⚡</span> Power Supply and Consumption</h3>
+                    <ul>
+                        <li>Connector: 3.81mm screw terminal block</li>
+                        <li>Input voltage: 9~65 VDC</li>
+                        <li>Power consumption: Idle: 100 mA@12 V</li>
+                        <li>Data link: 400 mA (peak) @12 V</li>
+                    </ul>
+                </div>
+                <div class="spec-group fade-in">
+                    <h3><span>📦</span> Physical Characteristics</h3>
+                    <ul>
+                        <li>Ingress protection: IP30</li>
+                        <li>Housing & Weight: Metal, 500 g</li>
+                        <li>Dimensions: 100 x 100 x 40 mm</li>
+                        <li>Installations: Desktop, 75 mm DIN rail mounting</li>
+                        <li>Operating temperature: -40 ~ +75 °C</li>
+                        <li>Storage temperature: -40 ~ +85 °C</li>
+                        <li>Relative humidity: 5 ~ 95% RH</li>
+                    </ul>
+                </div>
+                <div class="spec-group fade-in">
+                    <h3><span>🔧</span> Others</h3>
+                    <ul>
+                        <li>Reset button: 1x RST</li>
+                        <li>LED indicators: 1x PWR, 1x Status, 1 x WWAN, 1 x WLAN, 1x 2G, 1x 3G, 1x 4G, 4x RSSI</li>
+                        <li>Built-in: RTC, Watchdog, Timer</li>
+                    </ul>
+                </div>
+                <div class="spec-group fade-in">
+                    <h3><span>💻</span> Software</h3>
+                    <ul>
+                        <li>Network protocols: PPP, PPPoE, TCP, UDP, DHCP, ICMP, NAT, HTTP, HTTPs, DNS, ARP, BGP, RIP, OSPF, NTP, SMTP, Telnet, VLAN, SSH2, DDNS, etc.</li>
+                        <li>VPN tunnel: IPsec, OpenVPN, GRE, PPTP, DMVPN</li>
+                        <li>Firewall: DMZ, anti-DoS, Filtering (IP/Domain name/MAC address), Port Mapping, Access Control</li>
+                        <li>Remote management: WebUI, CLI, SMS, Radius</li>
+                        <li>Serial port: Transparent, TCP Client/Server, UDP, Modbus RTU Gateway</li>
+                    </ul>
+                </div>
+                <div class="spec-group fade-in">
+                    <h3><span>📋</span> Regulatory and Type Approvals</h3>
+                    <ul>
+                        <li>Environmental: RoHS 2.0, WEEE</li>
+                        <li>EMI: EN 55032: 2012/AC: 2013 (CE & RE) Class B</li>
+                        <li>EMS: 
+                            <ul>
+                                <li>IEC 61000-4-2 (ESD) Contact Level 2; Air Level 3</li>
+                                <li>IEC 61000-4-3 (RS) level 3</li>
+                                <li>IEC 61000-4-4 (EFT) level 3</li>
+                                <li>IEC 61000-4-5 (Surge) Level 3</li>
+                                <li>IEC 61000-4-6 (CS) level 3</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="ordering" class="section">
+            <h2>Ordering Information</h2>
+            <table class="ordering-table">
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>Category</th>
+                        <th>Dual SIM</th>
+                        <th>POE</th>
+                        <th>DI/DO</th>
+                        <th>RS232</th>
+                        <th>RS485</th>
+                        <th>Ethernet</th>
+                        <th>Dual SIM Redundancy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>C3143-A</td>
+                        <td>Cat 4</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr>
+                        <td>C3143-U</td>
+                        <td>Cat 1</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr>
+                        <td>C3243-A</td>
+                        <td>Cat 4</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr>
+                        <td>C3243-U</td>
+                        <td>Cat 1</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr>
+                        <td>C3443-A</td>
+                        <td>Cat 4</td>
+                        <td>❌</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr>
+                        <td>C3443-U</td>
+                        <td>Cat 1</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+     <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: <a href="mailto:info@teyfpardazan.ir">info@teyfpardazan.ir</a></p>
+                <p>Phone: <a href="tel:+983133931220">+98 31 33931220</a></p>
+                <p>Mobile: <a href="tel:+989131705136">+98 913 170 5136</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Address</h3>
+                <p>Ghadir Building, 22 Bahman Street,</p>
+                <p>Isfahan Science and Technology Town,</p>
+                <p>2nd Floor, Unit 203, Isfahan, Iran</p>
+                <p>📬 Postal Code: 81586-98569</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="https://teyfpardazan.ir" target="_blank">Website</a></p>
+                <p><a href="#" target="_blank">Privacy Policy</a></p>
+                <p><a href="#" target="_blank">Terms of Service</a></p>
+                <div class="social-icons">
+                    <a href="#" target="_blank">📘</a> <!-- Facebook -->
+                    <a href="#" target="_blank">🐦</a> <!-- Twitter -->
+                    <a href="#" target="_blank">📸</a> <!-- Instagram -->
+                    <a href="#" target="_blank">💼</a> <!-- LinkedIn -->
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Teyf Pardazan Spadana. All rights reserved. Subject to change without notice.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Image modal functionality
+        const productImage = document.getElementById('productImage');
+        productImage.addEventListener('click', function() {
+            const modal = document.createElement('div');
+            modal.style.position = 'fixed';
+            modal.style.top = '0';
+            modal.style.left = '0';
+            modal.style.width = '100%';
+            modal.style.height = '100%';
+            modal.style.backgroundColor = 'rgba(0,0,0,0.8)';
+            modal.style.display = 'flex';
+            modal.style.justifyContent = 'center';
+            modal.style.alignItems = 'center';
+            modal.style.zIndex = '1000';
+
+            const modalImg = document.createElement('img');
+            modalImg.src = this.src;
+            modalImg.style.maxWidth = '90%';
+            modalImg.style.maxHeight = '90%';
+            modalImg.style.objectFit = 'contain';
+
+            modal.appendChild(modalImg);
+            document.body.appendChild(modal);
+
+            modal.addEventListener('click', function() {
+                document.body.removeChild(modal);
+            });
+        });
+
+        // Application diagram
+        const applicationDiagram = document.getElementById('applicationDiagram');
+        const nodes = [
+            { id: 'industrialIoT', emoji: '🏭', text: 'Industrial IoT\nControl System\nRemote Access', x: 20, y: 20 },
+            { id: 'oilGas', emoji: '⛽', text: 'Oil, Gas & Mining\nMonitoring\nMaintenance', x: 20, y: 220 },
+            { id: 'energyUtilities', emoji: '⚡', text: 'Energy & Utilities\nSmart Metering\nRenewable Energy', x: 20, y: 420 },
+            { id: 'c3x43', text: 'C3X43', x: 300, y: 220, image: 'c3x43-product.png' },
+            { id: 'baseStation', emoji: '🗼', text: 'Base Station', x: 580, y: 220 },
+            { id: 'tpsCloud', text: 'TPS CLOUD', x: 860, y: 20, image: 'logo.png' }
+        ];
+
+        nodes.forEach(node => {
+            const element = document.createElement('div');
+            element.id = node.id;
+            element.className = 'app-node';
+            element.style.left = `${node.x}px`;
+            element.style.top = `${node.y}px`;
+            
+            if (node.image) {
+                const img = document.createElement('img');
+                img.src = node.image;
+                element.appendChild(img);
+            } else if (node.emoji) {
+                const emojiSpan = document.createElement('span');
+                emojiSpan.className = 'emoji';
+                emojiSpan.textContent = node.emoji;
+                element.appendChild(emojiSpan);
+            }
+            
+            const text = document.createElement('div');
+            text.innerHTML = node.text.replace(/\n/g, '<br>');
+            element.appendChild(text);
+            
+            applicationDiagram.appendChild(element);
+        });
+
+        function createConnection(start, end, protocol) {
+            const startNode = document.getElementById(start);
+            const endNode = document.getElementById(end);
+            const connection = document.createElement('div');
+            connection.className = 'app-connection';
+            
+            const startRect = startNode.getBoundingClientRect();
+            const endRect = endNode.getBoundingClientRect();
+            const diagramRect = applicationDiagram.getBoundingClientRect();
+
+            const length = Math.sqrt(Math.pow(endRect.left - startRect.left, 2) + Math.pow(endRect.top - startRect.top, 2));
+            const angle = Math.atan2(endRect.top - startRect.top, endRect.left - startRect.left) * 180 / Math.PI;
+
+            connection.style.width = `${length}px`;
+            connection.style.top = `${startRect.top + startRect.height / 2 - diagramRect.top}px`;
+            connection.style.left = `${startRect.left + startRect.width / 2 - diagramRect.left}px`;
+            connection.style.transform = `rotate(${angle}deg)`;
+            connection.style.transformOrigin = '0 0';
+
+            applicationDiagram.appendChild(connection);
+
+            const label = document.createElement('div');
+            label.className = 'connection-label';
+            label.textContent = protocol;
+            label.style.top = `${(startRect.top + endRect.top) / 2 - diagramRect.top}px`;
+            label.style.left = `${(startRect.left + endRect.left) / 2 - diagramRect.left}px`;
+            applicationDiagram.appendChild(label);
+
+            // Add data packet animation
+            const packet = document.createElement('div');
+            packet.className = 'data-packet';
+            applicationDiagram.appendChild(packet);
+
+            function animatePacket() {
+                packet.style.top = `${startRect.top + startRect.height / 2 - diagramRect.top}px`;
+                packet.style.left = `${startRect.left + startRect.width / 2 - diagramRect.left}px`;
+                
+                packet.animate([
+                    { transform: 'translate(0, 0)', opacity: 0 },
+                    { opacity: 1, offset: 0.1 },
+                    { opacity: 1, offset: 0.9 },
+                    { transform: `translate(${endRect.left - startRect.left}px, ${endRect.top - startRect.top}px)`, opacity: 0 }
+                ], {
+                    duration: 2000,
+                    iterations: Infinity
+                });
+            }
+
+            animatePacket();
+        }
+
+        createConnection('industrialIoT', 'c3x43', 'M2M');
+        createConnection('oilGas', 'c3x43', 'SCADA');
+        createConnection('energyUtilities', 'c3x43', 'IoT');
+        createConnection('c3x43', 'baseStation', 'Cellular');
+        createConnection('baseStation', 'tpsCloud', 'VPN');
+
+        // Animate specification groups on scroll
+        const specGroups = document.querySelectorAll('.spec-group');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        specGroups.forEach(group => {
+            group.style.opacity = 0;
+            group.style.transform = 'translateY(20px)';
+            group.style.transition = 'opacity 0.5s, transform 0.5s';
+            observer.observe(group);
+        });
+
+        // Add hover effect to app nodes
+        document.querySelectorAll('.app-node').forEach(node => {
+            node.addEventListener('mouseover', () => {
+                node.style.transform = 'scale(1.1)';
+                node.style.boxShadow = '0 8px 16px rgba(0,0,0,0.3)';
+            });
+            node.addEventListener('mouseout', () => {
+                node.style.transform = 'scale(1)';
+                node.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+            });
+        });
+    </script>
+</body>
+</html>
